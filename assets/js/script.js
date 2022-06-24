@@ -11,13 +11,16 @@ var questions = [
   }
 ];
 
+var secondsLeft = 75;
+
 //selecting all required elements
 const start_btn = document.querySelector(".start_btn");
 
 // if startQuiz button clicked
 start_btn.addEventListener("click", function() {
-    // startTimer()
-    // displayCurrentQuestion()
+
+    startTimer()
+
     displayCurrentQuestion(0);
 });
 
@@ -57,4 +60,20 @@ function displayCurrentQuestion(index) {
         
     // Set inner html of info box to que box
     divInfobox.parentNode.replaceChild(divTag, divInfobox);
+}
+
+function startTimer() {
+  // Sets interval in variable
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    var timeEl = document.querySelector('.timer_sec');
+    timeEl.textContent = secondsLeft;
+
+    if(secondsLeft === 0) {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+      
+      // TODO: Calls function to end quiz
+    }
+  }, 1000);
 }
