@@ -8,25 +8,36 @@ var questions = [
       "Hyper Text Multiple Language",
       "Hyper Tool Multi Language"
     ]
+  },
+  {
+    question: "What does HTML stand for? - 2",
+    answer: "Hyper Text Markup Language",
+    options: [
+      "Hyper Text Preprocessor",
+      "Hyper Text Markup Language",
+      "Hyper Text Multiple Language",
+      "Hyper Tool Multi Language"
+    ]
   }
 ];
 
 var secondsLeft = 75;
+var index = 0;
+var total = 0;
 
 //selecting all required elements
 const start_btn = document.querySelector(".start_btn");
 
 // if startQuiz button clicked
 start_btn.addEventListener("click", function() {
+    startTimer();
 
-    startTimer()
-
-    displayCurrentQuestion(0);
+    displayCurrentQuestion(index);
 });
 
 function displayCurrentQuestion(index) {
     // Get div infobox
-    var divInfobox = document.querySelector(".info_box");
+    var divInfobox = document.querySelector(".que-box");
 
     // Create a div element for que box  - <div class="que-text">Question</div>
     var divTag = document.createElement("div");
@@ -47,6 +58,7 @@ function displayCurrentQuestion(index) {
         var optionButton = document.createElement("button");
         optionButton.setAttribute("class", "option");
         optionButton.textContent = questions[index]['options'][i];
+        optionButton.addEventListener("click", compare);
 
         divQueoptions.appendChild(optionButton);
 
@@ -62,6 +74,29 @@ function displayCurrentQuestion(index) {
     divInfobox.parentNode.replaceChild(divTag, divInfobox);
 }
 
+function compare(event) {
+
+    var optionSelected = event.target.textContent;
+
+    if (optionSelected == questions[index]['answer']) {
+
+        console.log("Correct");
+        total += 10;
+
+    } else {
+
+        console.log("Wrong");
+        secondsLeft-=10;
+        total -= 5;
+
+    }
+
+    index = 1;
+    console.log(total);
+    displayCurrentQuestion(index);
+}
+
+
 function startTimer() {
   // Sets interval in variable
   var timerInterval = setInterval(function() {
@@ -72,7 +107,7 @@ function startTimer() {
     if(secondsLeft === 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
-      
+
       // TODO: Calls function to end quiz
     }
   }, 1000);
