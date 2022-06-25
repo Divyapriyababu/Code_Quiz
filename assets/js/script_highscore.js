@@ -21,7 +21,7 @@ for (var i = 0; i < quizScores.length; i++) {
     var quizScoreDisplay = quizScores[i];
     var displayItem = document.createElement("li");
     displayItem.setAttribute("class", "listitem");
-    displayItem.textContent = quizScoreDisplay['name'] + "-" + quizScoreDisplay['score'];
+    displayItem.textContent = quizScoreDisplay['name'] + " - " + quizScoreDisplay['score'];
     listItem.appendChild(displayItem);
     
 }
