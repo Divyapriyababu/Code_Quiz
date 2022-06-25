@@ -5,13 +5,20 @@ var  clearhighScorebtn= document.querySelector(".clear_high_scores");
 
 quizScores = JSON.parse(quizScores);
 
+var quizScoresJson = [];
+
 var listItem = document.createElement("ol");
 listScores.appendChild(listItem);
 
 for (var i = 0; i < quizScores.length; i++) {
-
     var quizScoreDisplay = JSON.parse(quizScores[i]);
+    quizScoresJson.push(quizScoreDisplay);    
+}
 
+quizScores = quizScoresJson.sort(function(a,b) { return b['score']-a['score']});
+
+for (var i = 0; i < quizScores.length; i++) {
+    var quizScoreDisplay = quizScores[i];
     var displayItem = document.createElement("li");
     displayItem.setAttribute("class", "listitem");
     displayItem.textContent = quizScoreDisplay['name'] + "-" + quizScoreDisplay['score'];

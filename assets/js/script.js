@@ -10,13 +10,33 @@ var questions = [
     ]
   },
   {
-    question: "What does HTML stand for? - 2",
-    answer: "Hyper Text Markup Language",
+    question: "Commonly used data types DO NOT include:",
+    answer: "alerts",
     options: [
-      "Hyper Text Preprocessor",
-      "Hyper Text Markup Language",
-      "Hyper Text Multiple Language",
-      "Hyper Tool Multi Language"
+      "strings",
+      "booleans",
+      "alerts",
+      "numbers"
+    ]
+  },
+  {
+    question: "The condition in an if / else statement is enclosed within ________.",
+    answer: "parentheses",
+    options: [
+      "quotes",
+      "parentheses",
+      "square brackets",
+      "curly brackets"
+    ]
+  },
+  {
+    question: "Which of the following function of Array object joins all elements of an array into a string?",
+    answer: "join",
+    options: [
+      "concat",
+      "join",
+      "pop",
+      "map"
     ]
   }
 ];
@@ -24,6 +44,7 @@ var questions = [
 var secondsLeft = 75;
 var index = 0;
 var totalScore = 0;
+var timerInterval;
 
 //selecting all required elements
 const start_btn = document.querySelector(".start_btn");
@@ -69,7 +90,7 @@ function displayCurrentQuestion(index) {
     // Append que and options to que box
     divTag.appendChild(divQuetext);
     divTag.appendChild(divQueoptions);
-        
+
     // Set inner html of info box to que box
     divInfobox.parentNode.replaceChild(divTag, divInfobox);
 }
@@ -77,7 +98,6 @@ function displayCurrentQuestion(index) {
 function compare(event) {
 
     var optionSelected = event.target.textContent;
-
     if (optionSelected == questions[index]['answer']) {
         totalScore += 10;
     } else {
@@ -86,8 +106,9 @@ function compare(event) {
     }
 
     index++;
-
+    
     if (index == questions.length){
+        clearInterval(timerInterval);
         finalScoreDisplay();
     }  else {    
         displayCurrentQuestion(index);
@@ -162,7 +183,7 @@ function compare(event) {
 
 function startTimer() {
   // Sets interval in variable
-  var timerInterval = setInterval(function() {
+  timerInterval = setInterval(function() {
     secondsLeft--;
     var timeEl = document.querySelector('.timer_sec');
     timeEl.textContent = secondsLeft;
